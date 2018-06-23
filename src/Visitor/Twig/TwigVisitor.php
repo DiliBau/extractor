@@ -58,6 +58,10 @@ abstract class TwigVisitor extends BaseVisitor
      */
     protected function doEnterNode($node)
     {
+        if (!$this->collection) {
+            return $node;
+        }
+
         return $this->worker->work($node, $this->collection, function () {
             return $this->getAbsoluteFilePath();
         });
